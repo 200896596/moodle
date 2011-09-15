@@ -230,10 +230,9 @@ echo '</div>';
 
 echo '<table class="list" summary="">';
 
-// add the idnumber line only for the visitor who has the permission 'viewalldetails'
-// if the idnumber is null, hide this line
-if ($user->idnumber && has_capability('moodle/user:viewalldetails', $context)) {
-    print_row(get_string("idnumber").":", "$user->idnumber");    
+// Show idnumber
+if ($user->idnumber && $user->auth == 'cas' && has_capability('moodle/user:viewalldetails', $context)) {
+    print_row(get_string("idnumber").":", "$user->idnumber");
 }
 
 if (! isset($hiddenfields['country']) && $user->country) {
